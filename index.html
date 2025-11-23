@@ -14,7 +14,6 @@
                 <div class="hero-grid">
                     <div class="hero-title">
                         <h1>Agent State</h1>
-                        <p class="hero-byline">by Mottu</p>
                     </div>
                     <div class="hero-code">
                         <div class="code-block">
@@ -27,7 +26,7 @@
 
 You have ownership of this organization's agentstate repository. There you can store tools, scripts, persistent memory, utilities, and organizational context shared by all agents in this organization.
 
-Search before creating. Save helper scripts and organizational information (developer usernames, system ownership, TPM context) here. Commit frequently with conventional commit format. Maintain consistent naming and check for duplicates. Use scoped AGENTS.md files per folder as needed.</code></pre>
+Search before creating. Save helper scripts and organizational information (developer usernames, system ownership, PM context) to this repository. Commit frequently with conventional commit format. Maintain consistent naming and check for duplicates. Use scoped AGENTS.md files per folder as needed.</code></pre>
                         </div>
                         <div class="fork-command">
                             <div class="code-block">
@@ -36,7 +35,7 @@ Search before creating. Save helper scripts and organizational information (deve
                                         <path d="M5.5 3.5H3.5C2.67157 3.5 2 4.17157 2 5V12.5C2 13.3284 2.67157 14 3.5 14H11C11.8284 14 12.5 13.3284 12.5 12.5V10.5M5.5 3.5C5.5 2.67157 6.17157 2 7 2H9.5M5.5 3.5C5.5 4.32843 6.17157 5 7 5H9.5M9.5 2H12.5C13.3284 2 14 2.67157 14 3.5V7M9.5 2V5M9.5 5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                                     </svg>
                                 </button>
-                                <pre><code>gh repo fork agentstate/agentstate-template</code></pre>
+                                <pre><code>gh repo fork caetanominuzzo/agentstate-template</code></pre>
                             </div>
                         </div>
                     </div>
@@ -70,10 +69,11 @@ Search before creating. Save helper scripts and organizational information (deve
 ├── scripts/
 │   ├── AGENTS.md  // &lt;-- Use scoped AGENTS.md per folder or as you like
 │   ├── jira_helper.py
+│   ├── devin_api_client.py
 │   └── git_utils.sh
 ├── memory/
 │   ├── developers.json
-│   ├── tpm.json
+│   ├── pms.json
 │   └── systems.json
 ├── docs/
 │   └── dev_onboarding.md
@@ -121,7 +121,7 @@ Search before creating. Save helper scripts and organizational information (deve
                 <p>
                     Agent State solves this by giving agents a place to store what they learn and create. When agents 
                     write helper scripts, they save them to the repository. When agents learn who owns a system or 
-                    which TPM worked on a project, that information persists. The next agent session, or even a 
+                    which PM worked on a project, that information persists. The next agent session, or even a 
                     different agent, can immediately access this knowledge.
                 </p>
                 <p>This creates a compounding effect:</p>
@@ -131,7 +131,7 @@ Search before creating. Save helper scripts and organizational information (deve
                         and reused automatically in future sessions.
                     </li>
                     <li>
-                        <strong>Knowledge builds</strong> Context about developers, TPMs, systems, and processes 
+                        <strong>Knowledge builds</strong> Context about developers, PMs, systems, and processes 
                         accumulates over time, making agents smarter with each interaction.
                     </li>
                     <li>
@@ -145,19 +145,21 @@ Search before creating. Save helper scripts and organizational information (deve
                 
                 <h3>Reusable Helper Scripts</h3>
                 <p>
-                    When an agent struggled with Jira, it wrote a Python helper and saved it directly to the 
-                    Agent State repository. Now that helper is automatically reused in every session.
+                    When an agent struggled with Jira, it wrote a Python helper. Initially, this helper lived as a Devin memory, 
+                    requiring regeneration from memory each time it was needed. When the agent first accessed the script from its 
+                    knowledge base memory, it immediately wrote a persistent version to the Agent State repository. Now that helper 
+                    is automatically reused in every session without needing to be regenerated.
                 </p>
                 <p class="example-note">
-                    Code is the most versatile way to connect any systems. Agent State makes these integrations persistent, 
+                    Scripts give agents direct access to APIs and external services. Agent State makes these integrations persistent, 
                     so agents don't rebuild the same connections every session.
                 </p>
 
                 <h3>Organizational Memory</h3>
                 <p>
-                    The Agent State repo stores each developer's and TPM's GitHub username, the systems they touched, 
+                    The Agent State repo stores each developer's and PM's GitHub username, the systems they touched, 
                     and their Jira context. Agents can answer questions like "who owns system X" or 
-                    "which TPM worked on process Y."
+                    "which PM worked on process Y."
                 </p>
                 <p class="example-note">
                     This organizational memory also enables agents to properly label and add co-authors to PRs, 
@@ -174,6 +176,30 @@ Search before creating. Save helper scripts and organizational information (deve
                     This behavior emerges naturally as the Agent State repository accumulates context. The stored 
                     organizational memory enables agents to make connections about which repositories to use, which 
                     systems are involved, or who to contact, reducing the need for explicit instructions.
+                </p>
+
+                <h3>Orchestrator and Sub-Agent Spawning</h3>
+                <p>
+                    One powerful tool in Agent State is an orchestrator prompt that uses the Devin API client to spawn sub-agents 
+                    for breaking down large tasks, or even spawn a new session for itself—summarizing and creating a new session 
+                    to keep the general context of a single session under limits. By setting these limits in AGENTS.md, we direct 
+                    agents to automatically perform this spawning both for large tasks and when approaching context limits or ACU 
+                    limits for Devin.
+                </p>
+                <p class="example-note">
+                    The <code>devin_api_client.py</code> script in the Agent State repository enables agents to manage their own 
+                    lifecycle, automatically creating new sessions when needed to maintain efficiency and stay within resource constraints.
+                </p>
+
+                <h3>Environment Secrets and Configuration</h3>
+                <p>
+                    Scripts in the Agent State repository can use environment secrets defined in Devin secrets (for Devin) or locally 
+                    configured environment variables (for Windsurf and Cursor). This allows scripts to securely access APIs, credentials, 
+                    and other sensitive configuration without hardcoding values.
+                </p>
+                <p class="example-note">
+                    Agents can access these secrets through standard environment variable patterns, making scripts portable across 
+                    different agent environments while maintaining security best practices.
                 </p>
 
                 <h2>FAQ</h2>
