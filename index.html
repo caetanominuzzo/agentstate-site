@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent State - Standard for Persistent Agent State</title>
+    <meta name="description" content="Agent State is a standard for managing persistent state, tools, and long-term memory for LLM agents through a dedicated Git repository.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-title">
+                        <h1>Agent State</h1>
+                        <p class="hero-byline">by Mottu</p>
+                    </div>
+                    <div class="hero-code">
+                        <div class="code-block">
+                            <button class="copy-btn" aria-label="Copy to clipboard">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.5 3.5H3.5C2.67157 3.5 2 4.17157 2 5V12.5C2 13.3284 2.67157 14 3.5 14H11C11.8284 14 12.5 13.3284 12.5 12.5V10.5M5.5 3.5C5.5 2.67157 6.17157 2 7 2H9.5M5.5 3.5C5.5 4.32843 6.17157 5 7 5H9.5M9.5 2H12.5C13.3284 2 14 2.67157 14 3.5V7M9.5 2V5M9.5 5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <pre><code># AGENTS.md
+
+You have ownership of this organization's agentstate repository. There you can store tools, scripts, persistent memory, utilities, and organizational context shared by all agents in this organization.
+
+Search before creating. Save helper scripts and organizational information (developer usernames, system ownership, TPM context) here. Commit frequently with conventional commit format. Maintain consistent naming and check for duplicates. Use scoped AGENTS.md files per folder as needed.</code></pre>
+                        </div>
+                        <div class="fork-command">
+                            <div class="code-block">
+                                <button class="copy-btn" aria-label="Copy to clipboard">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.5 3.5H3.5C2.67157 3.5 2 4.17157 2 5V12.5C2 13.3284 2.67157 14 3.5 14H11C11.8284 14 12.5 13.3284 12.5 12.5V10.5M5.5 3.5C5.5 2.67157 6.17157 2 7 2H9.5M5.5 3.5C5.5 4.32843 6.17157 5 7 5H9.5M9.5 2H12.5C13.3284 2 14 2.67157 14 3.5V7M9.5 2V5M9.5 5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <pre><code>gh repo fork agentstate/agentstate-template</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-description">
+                        <p class="lead">
+                            A standard for persistent agent state that helps maintain continuity, 
+                            reuse tools, and preserve context across agent sessions and even across different agents.
+                        </p>
+                        <p>
+                            Agent State is a dedicated Git repository that stores tools, scripts, persistent memory, utilities, and organizational 
+                            context. Think of it as a "state layer" for agents—a persistent memory system separate from individual project repositories. 
+                            It integrates easily into existing agent setups and helps AI agents work more effectively by providing a natural environment that mimics developer workflows.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <h2>Repository Structure</h2>
+                <p>Fork the <code>agentstate-template</code> repository to create your organization's Agent State repository:</p>
+                <div class="code-block">
+                    <button class="copy-btn" aria-label="Copy to clipboard">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.5 3.5H3.5C2.67157 3.5 2 4.17157 2 5V12.5C2 13.3284 2.67157 14 3.5 14H11C11.8284 14 12.5 13.3284 12.5 12.5V10.5M5.5 3.5C5.5 2.67157 6.17157 2 7 2H9.5M5.5 3.5C5.5 4.32843 6.17157 5 7 5H9.5M9.5 2H12.5C13.3284 2 14 2.67157 14 3.5V7M9.5 2V5M9.5 5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <pre><code># agentstate/
+├── AGENTS.md
+├── scripts/
+│   ├── AGENTS.md  // &lt;-- Use scoped AGENTS.md per folder or as you like
+│   ├── jira_helper.py
+│   └── git_utils.sh
+├── memory/
+│   ├── developers.json
+│   ├── tpm.json
+│   └── systems.json
+├── docs/
+│   └── dev_onboarding.md
+└── context/
+    └── organizational.md</code></pre>
+                </div>
+
+                <h2>Getting Started</h2>
+                <p>
+                    To make Agent State work, simply add the Agent State repository to your agent's knowledge base or include 
+                    instructions about it in your AGENTS.md file. The agent needs to understand that it has access to (or ownership of) 
+                    the Agent State repository and should use it to store and retrieve tools, scripts, and organizational context.
+                </p>
+                <p>
+                    This standard is virtually compatible with every development agent system that has filesystem and Git capabilities. 
+                    That's it. Once the agent knows about the Agent State repository, it will naturally start using it to persist 
+                    work across sessions and share knowledge with other agents. We've seen it work with systems like Devin, Cursor, and Windsurf, and expect 
+                    it to work with any agent that can interact with Git repositories.
+                </p>
+
+                <h2>Agent State vs Agents.md</h2>
+                <p>
+                    These two standards serve different but complementary purposes:
+                </p>
+                <p>
+                    <strong>Agents.md</strong> standardizes <strong>instructions</strong> for agents. Defines how agents should 
+                    behave and which guidelines to follow.
+                </p>
+                <p>
+                    <strong>Agent State</strong> standardizes the <strong>dedicated Git repository</strong> used by all 
+                    agents within an organization for long-term state, tools, and memory. 
+                    Each organization maintains its own repository.
+                </p>
+                <p>
+                    Both standards are complementary and can be used together to create a robust 
+                    agent ecosystem.
+                </p>
+
+                <h2>The Problem We Solved</h2>
+                <p>
+                    Working with agents at Mottu, where we have thousands of repositories, we noticed they kept 
+                    rediscovering the same information, rewriting similar scripts, and losing context between sessions. 
+                    This wasted tokens, time, and created frustration.
+                </p>
+                <p>
+                    Agent State solves this by giving agents a place to store what they learn and create. When agents 
+                    write helper scripts, they save them to the repository. When agents learn who owns a system or 
+                    which TPM worked on a project, that information persists. The next agent session, or even a 
+                    different agent, can immediately access this knowledge.
+                </p>
+                <p>This creates a compounding effect:</p>
+                <ul class="benefits-list">
+                    <li>
+                        <strong>Scripts accumulate</strong> Tools and helpers written by agents are saved directly 
+                        and reused automatically in future sessions.
+                    </li>
+                    <li>
+                        <strong>Knowledge builds</strong> Context about developers, TPMs, systems, and processes 
+                        accumulates over time, making agents smarter with each interaction.
+                    </li>
+                    <li>
+                        <strong>Context persists</strong> Agents don't start from scratch; they build on previous 
+                        work and stored knowledge from any agent in the organization.
+                    </li>
+                </ul>
+
+                <h2>Examples</h2>
+                <p>Here are some concrete examples of how Agent State works in practice:</p>
+                
+                <h3>Reusable Helper Scripts</h3>
+                <p>
+                    When an agent struggled with Jira, it wrote a Python helper and saved it directly to the 
+                    Agent State repository. Now that helper is automatically reused in every session.
+                </p>
+                <p class="example-note">
+                    Code is the most versatile way to connect any systems. Agent State makes these integrations persistent, 
+                    so agents don't rebuild the same connections every session.
+                </p>
+
+                <h3>Organizational Memory</h3>
+                <p>
+                    The Agent State repo stores each developer's and TPM's GitHub username, the systems they touched, 
+                    and their Jira context. Agents can answer questions like "who owns system X" or 
+                    "which TPM worked on process Y."
+                </p>
+                <p class="example-note">
+                    This organizational memory also enables agents to properly label and add co-authors to PRs, 
+                    allowing for better data and attribution in dev lake. Agents can automatically identify 
+                    relevant stakeholders and ensure proper credit is given based on the stored organizational context.
+                </p>
+
+                <h3>Automatic Inference</h3>
+                <p>
+                    In systems with good memory reuse like Devin and Windsurf, we've observed that agents often 
+                    no longer need explicit repository specifications; they infer context from their stored history.
+                </p>
+                <p class="example-note">
+                    This behavior emerges naturally as the Agent State repository accumulates context. The stored 
+                    organizational memory enables agents to make connections about which repositories to use, which 
+                    systems are involved, or who to contact, reducing the need for explicit instructions.
+                </p>
+
+                <h2>FAQ</h2>
+                
+                <h3>How do I set up an Agent State repository?</h3>
+                <p>
+                    Create a new Git repository in your organization. You can structure it however makes sense 
+                    for your needs, but a common structure includes folders for scripts, memory, docs, and context. 
+                    All agents in your organization should have access to this repository.
+                </p>
+
+                <h3>Can I have multiple Agent State repositories?</h3>
+                <p>
+                    Yes. Organizations may maintain multiple Agent State repositories to isolate different types 
+                    of information. For example, you might have separate repositories for different teams or 
+                    different types of data.
+                </p>
+
+                <h3>What should I store in the Agent State repository?</h3>
+                <p>
+                    Store anything that should persist across sessions: helper scripts agents create, organizational 
+                    metadata (developers, systems, ownership), context about processes, and any other information 
+                    that helps agents work more effectively.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Agent State is an open standard for the LLM agent ecosystem.
+            </p>
+            <p>
+                We're building a public list of organizations using Agent State. If you're using it, reach out to be included.
+            </p>
+            <div class="footer-credits">
+                <p>
+                    <strong>Credits:</strong> Inspired by the goals and style of the <a href="https://agents.md" target="_blank" rel="noopener">Agents.md</a> site.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.nextElementSibling;
+                    const code = codeBlock.querySelector('code').textContent;
+                    
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalHTML = this.innerHTML;
+                        this.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+                        setTimeout(() => {
+                            this.innerHTML = originalHTML;
+                        }, 2000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
