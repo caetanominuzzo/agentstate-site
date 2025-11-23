@@ -46,8 +46,11 @@ Search before creating. Save helper scripts and organizational information (deve
                         </p>
                         <p>
                             Agent State is a dedicated Git repository that stores tools, scripts, persistent memory, utilities, and organizational 
-                            context. Think of it as a "state layer" for agents—a persistent memory system separate from individual project repositories. 
-                            It integrates easily into existing agent setups and helps AI agents work more effectively by providing a natural environment that mimics developer workflows.
+                            context. Think of it as a "state layer" for agents—a persistent memory system separate from individual project repositories.
+                        </p>
+                        <p>
+                            Born from real production use. It integrates easily into existing agent setups and helps AI agents work more effectively 
+                            by providing a natural environment that mimics developer workflows.
                         </p>
                     </div>
                 </div>
@@ -57,7 +60,7 @@ Search before creating. Save helper scripts and organizational information (deve
         <section class="content">
             <div class="container">
                 <h2>Repository Structure</h2>
-                <p>Fork the <code>agentstate-template</code> repository to create your organization's Agent State repository:</p>
+                <p>This isn't a framework — it's a convention. Fork the <code>agentstate-template</code> repository to create your organization's Agent State repository:</p>
                 <div class="code-block">
                     <button class="copy-btn" aria-label="Copy to clipboard">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -83,14 +86,20 @@ Search before creating. Save helper scripts and organizational information (deve
                 <h2>Getting Started</h2>
                 <p>
                     To make Agent State work, simply add the Agent State repository to your agent's knowledge base or include 
-                    instructions about it in your AGENTS.md file. The agent needs to understand that it has access to (or ownership of) 
-                    the Agent State repository and should use it to store and retrieve tools, scripts, and organizational context.
+                    instructions about it in your AGENTS.md file.
+                </p>
+                <p>
+                    The agent needs to understand that it has access to (or ownership of) the Agent State repository and should use it 
+                    to store and retrieve tools, scripts, and organizational context.
                 </p>
                 <p>
                     This standard is virtually compatible with every development agent system that has filesystem and Git capabilities. 
-                    That's it. Once the agent knows about the Agent State repository, it will naturally start using it to persist 
-                    work across sessions and share knowledge with other agents. We've seen it work with systems like Devin, Cursor, and Windsurf, and expect 
-                    it to work with any agent that can interact with Git repositories.
+                    Once the agent knows about the Agent State repository, it will naturally start using it to persist work across sessions 
+                    and share knowledge with other agents.
+                </p>
+                <p>
+                    We've seen it work with systems like Devin, Cursor, and Windsurf, and expect it to work with any agent that can 
+                    interact with Git repositories.
                 </p>
 
                 <h2>Agent State vs Agents.md</h2>
@@ -98,20 +107,19 @@ Search before creating. Save helper scripts and organizational information (deve
                     These two standards serve different but complementary purposes:
                 </p>
                 <p>
-                    <strong>Agents.md</strong> standardizes <strong>instructions</strong> for agents. Defines how agents should 
-                    behave and which guidelines to follow.
+                    <strong>Agents.md</strong> → how agents behave
                 </p>
                 <p>
-                    <strong>Agent State</strong> standardizes the <strong>dedicated Git repository</strong> used by all 
-                    agents within an organization for long-term state, tools, and memory. 
-                    Each organization maintains its own repository.
+                    <strong>Agent State</strong> → where agents persist knowledge
                 </p>
                 <p>
-                    Both standards are complementary and can be used together to create a robust 
-                    agent ecosystem.
+                    Both standards are complementary and can be used together.
                 </p>
 
                 <h2>The Problem We Solved</h2>
+                <p>
+                    This pattern emerged inside Mottu while scaling Devin to production.
+                </p>
                 <p>
                     Working with agents at Mottu, where we have thousands of repositories, we noticed they kept 
                     rediscovering the same information, rewriting similar scripts, and losing context between sessions. 
@@ -145,9 +153,11 @@ Search before creating. Save helper scripts and organizational information (deve
                 <h3>Reusable Helper Scripts</h3>
                 <p>
                     When an agent struggled with Jira, it wrote a Python helper. Initially, this helper lived as a Devin memory, 
-                    requiring regeneration from memory each time it was needed. When the agent first accessed the script from its 
-                    knowledge base memory, it immediately wrote a persistent version to the Agent State repository. Now that helper 
-                    is automatically reused in every session without needing to be regenerated.
+                    requiring regeneration from memory each time it was needed.
+                </p>
+                <p>
+                    When the agent first accessed the script from its knowledge base memory, it immediately wrote a persistent version 
+                    to the Agent State repository. Now that helper is automatically reused in every session without needing to be regenerated.
                 </p>
                 <p class="example-note">
                     Scripts give agents direct access to APIs and external services. Agent State makes these integrations persistent, 
@@ -179,11 +189,13 @@ Search before creating. Save helper scripts and organizational information (deve
 
                 <h3>Orchestrator and Sub-Agent Spawning</h3>
                 <p>
-                    One powerful tool in Agent State is an orchestrator prompt that uses the Devin API client to spawn sub-agents 
+                    One tool in our Agent State is an orchestrator prompt that uses the Devin API client to spawn sub-agents 
                     for breaking down large tasks, or even spawn a new session for itself—summarizing and creating a new session 
-                    to keep the general context of a single session under limits. By setting these limits in AGENTS.md, we direct 
-                    agents to automatically perform this spawning both for large tasks and when approaching context limits or ACU 
-                    limits for Devin.
+                    to keep the general context of a single session under limits.
+                </p>
+                <p>
+                    By setting these limits in AGENTS.md, we direct agents to automatically perform this spawning both for large tasks 
+                    and when approaching context limits or ACU limits for Devin.
                 </p>
                 <p class="example-note">
                     The <code>devin_api_client.py</code> script in the Agent State repository enables agents to manage their own 
