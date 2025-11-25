@@ -14,6 +14,7 @@
                 <div class="hero-grid">
                     <div class="hero-title">
                         <h1>Agent State</h1>
+                        <p class="hero-subtitle">Standard to persistent agent state</p>
                     </div>
                     <div class="hero-code">
                         <div class="code-block">
@@ -41,16 +42,17 @@ Search before creating. Save helper scripts and organizational information (deve
                     </div>
                     <div class="hero-description">
                         <p class="lead">
-                            A standard for persistent agent state that helps maintain continuity, 
-                            reuse tools, and preserve context across agent sessions and even across different agents.
+                            To give your agents a real, persistent memory layer, just like a developer's shared toolbox, so they stay consistent, 
+                            reuse knowledge, and work smarter across sessions and across projects.
                         </p>
                         <p>
-                            Agent State is a dedicated Git repository that stores tools, scripts, persistent memory, utilities, and organizational 
-                            context. Think of it as a "state layer" for agents—a persistent memory system separate from individual project repositories.
+                            A dedicated Git repository that stores tools, scripts, utilities, org-wide context, and long-term memory. 
+                            It's the standard way for agents to keep shared state, avoid duplication, and collaborate through a familiar developer workflow.
                         </p>
                         <p>
-                            Born from real production use. It integrates easily into existing agent setups and helps AI agents work more effectively 
-                            by providing a natural environment that mimics developer workflows.
+                            Fork the template, organize your tools and context inside it, 
+                            Tell your agents they own this repository, commit often using conventional commits, and use scoped AGENTS.md files per folder to maintain clarity. 
+                            Agents will read from and write to this repo to preserve continuity.
                         </p>
                     </div>
                 </div>
@@ -60,7 +62,7 @@ Search before creating. Save helper scripts and organizational information (deve
         <section class="content">
             <div class="container">
                 <h2>Repository Structure</h2>
-                <p>This isn't a framework — it's a convention. Fork the <code>agentstate-template</code> repository to create your organization's Agent State repository:</p>
+                <p>This isn't a framework, it's a convention. Fork the <code>agentstate-template</code> repository to create your organization's Agent State repository:</p>
                 <div class="code-block">
                     <button class="copy-btn" aria-label="Copy to clipboard">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,7 +192,7 @@ Search before creating. Save helper scripts and organizational information (deve
                 <h3>Orchestrator and Sub-Agent Spawning</h3>
                 <p>
                     One tool in our Agent State is an orchestrator prompt that uses the Devin API client to spawn sub-agents 
-                    for breaking down large tasks, or even spawn a new session for itself—summarizing and creating a new session 
+                    for breaking down large tasks, or even spawn a new session for itself, summarizing and creating a new session 
                     to keep the general context of a single session under limits.
                 </p>
                 <p>
