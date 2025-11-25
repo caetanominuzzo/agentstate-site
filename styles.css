@@ -87,6 +87,14 @@ body {
     line-height: 1.1;
 }
 
+.hero-subtitle {
+    font-size: 1.125rem;
+    font-weight: 400;
+    margin: 0.5rem 0 0 0;
+    color: var(--text-light);
+    letter-spacing: 0.01em;
+}
+
 .hero-byline {
     font-size: 0.875rem;
     color: var(--text-muted);
