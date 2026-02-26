@@ -157,6 +157,8 @@ Search before creating. Save helper scripts and organizational information (deve
                 <p class="example-note">
                     Agents can access these secrets through standard environment variable patterns, making scripts portable across
                     different agent environments while maintaining security best practices.
+                    For Keycloak/OIDC environments, <a href="https://pypi.org/project/sso-cli/" target="_blank" rel="noopener">sso-cli</a>
+                    lets agents fetch auth tokens on demand without storing credentials.
                 </p>
 
                 <h2>Limitations & Considerations</h2>
@@ -323,6 +325,9 @@ Search before creating. Save helper scripts and organizational information (deve
             <p>
                 We're building a public list of organizations using Agent State.
                 If you're using it, <a href="https://github.com/caetanominuzzo/agentstate-template/issues" target="_blank" rel="noopener">open an issue</a> to be included.
+            </p>
+            <p>
+                <strong>See Also:</strong> <a href="https://pypi.org/project/sso-cli/" target="_blank" rel="noopener">sso-cli</a> — a CLI tool for fetching authentication tokens from Keycloak/OIDC providers, designed for AI agents and developers.
             </p>
             <div class="footer-credits">
                 <p>
