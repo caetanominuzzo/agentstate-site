@@ -53,32 +53,17 @@ body {
     padding: 0 var(--spacing-unit);
 }
 
-/* Hero Section */
+/* Hero Section — simple stacked layout */
 .hero {
-    padding: 4rem 0;
+    padding: 4rem 0 3rem;
     background-color: var(--bg-color);
-    border-bottom: 1px solid var(--border-color);
 }
 
 .hero .container {
     max-width: var(--max-width-hero);
 }
 
-.hero-grid {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    grid-template-rows: auto auto;
-    gap: 3rem 4rem;
-    align-items: start;
-}
-
-.hero-title {
-    align-self: end;
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.hero-title h1 {
+.hero h1 {
     font-size: 3.5rem;
     font-weight: 700;
     margin: 0;
@@ -90,44 +75,13 @@ body {
 .hero-subtitle {
     font-size: 1.125rem;
     font-weight: 400;
-    margin: 0.5rem 0 0 0;
+    margin: 1.5rem 0 1.5rem 0;
     color: var(--text-light);
     letter-spacing: 0.01em;
 }
 
-.hero-byline {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    margin: 0.5rem 0 0 0;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-
 .hero-description {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-/* Hero Code */
-.hero-code {
-    position: relative;
-    align-self: start;
-    grid-column: 2;
-    grid-row: 2 / 3;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.fork-command {
-    margin-top: 0.5rem;
-}
-
-.fork-command .code-block {
-    background: var(--bg-card);
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 0 20px rgba(0, 177, 49, 0.15);
+    margin-bottom: 2rem;
 }
 
 .hero-description .lead {
@@ -150,8 +104,58 @@ body {
     font-weight: 600;
 }
 
-.hero-structure {
-    position: relative;
+/* Hero action buttons */
+.hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.hero-see-more {
+    display: inline-block;
+    padding: 0.6rem 1.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.hero-see-more:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    text-shadow: none;
+}
+
+.hero-build-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.8rem;
+    border-radius: 6px;
+    background: var(--primary-color);
+    color: #000;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.hero-build-btn:hover {
+    background: var(--primary-light);
+    color: #000;
+    text-decoration: none;
+    text-shadow: none;
+    box-shadow: 0 0 16px rgba(0, 177, 49, 0.3);
+}
+
+.btn-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
 }
 
 /* Code Block */
@@ -237,6 +241,11 @@ p {
 .content {
     padding: 4rem 0;
     background-color: var(--bg-light);
+        background: radial-gradient(
+        circle at top left,
+        rgba(10, 15, 8, 10) 0%,
+        rgba(0, 0, 0, 1) 100%
+    );
 }
 
 .benefits-list {
@@ -424,60 +433,12 @@ footer a:hover {
 
 /* Responsive */
 
-@media (max-width: 1280px) and (min-width: 1024px) {
-    .hero-grid {
-        gap: 2rem 2.5rem;
-    }
-
-    .hero .container {
-        padding: 0 2rem;
-        max-width: calc(100% - 4rem);
-    }
-
-    .code-block {
-        max-width: 100%;
-        overflow-x: auto;
-    }
-
-    .code-block pre {
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 968px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 2.5rem;
-    }
-
-    .hero-title {
-        align-self: start;
-        grid-column: 1;
-        grid-row: 1;
-    }
-
-    .hero-description {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
-    .hero-code {
-        grid-column: 1;
-        grid-row: 3;
-    }
-
-    .hero .container {
-        max-width: 100%;
-    }
-}
-
 @media (max-width: 768px) {
     .hero {
-        padding: 2.5rem 0;
+        padding: 2.5rem 0 2rem;
     }
 
-    .hero-title h1 {
+    .hero h1 {
         font-size: 2.5rem;
     }
 
@@ -516,10 +477,10 @@ footer a:hover {
 
 @media (max-width: 480px) {
     .hero {
-        padding: 2rem 0;
+        padding: 2rem 0 1.5rem;
     }
 
-    .hero-title h1 {
+    .hero h1 {
         font-size: 2rem;
     }
 
@@ -558,8 +519,483 @@ footer a:hover {
     .container {
         padding: 0 1rem;
     }
+}
 
-    .hero-grid {
-        gap: 2rem;
+/* ===================================================================
+   ASSEMBLER SECTION
+   =================================================================== */
+
+.assembler {
+    padding: 4rem 0 8rem;
+    background-color: var(--bg-color);
+    background: radial-gradient(
+        circle at top left,
+        rgba(10, 15, 8, 10) 0%,
+        rgba(0, 0, 0, 1) 100%
+    );
+}
+
+.assembler-container {
+    max-width: var(--max-width-hero);
+}
+
+.assembler h2 {
+    margin-top: 0;
+}
+
+.assembler-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+
+/* Toolbar: filters + search */
+.assembler-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-light);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.filter-tab:hover {
+    border-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.filter-tab.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #000;
+    font-weight: 600;
+}
+
+.assembler-search {
+    margin-left: auto;
+}
+
+.assembler-search input {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--bg-card);
+    color: var(--text-color);
+    font-size: 0.875rem;
+    font-family: inherit;
+    width: 220px;
+    transition: border-color 0.2s ease;
+}
+
+.assembler-search input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.assembler-search input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Grid */
+.assembler-grid {
+    min-height: 200px;
+}
+
+/* 2-level category hierarchy */
+.assembler-category {
+    margin-bottom: 2.5rem;
+}
+
+.assembler-category-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Subcategories flow side by side */
+.assembler-subcategories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+}
+
+.assembler-subcategory {
+    margin-bottom: 0;
+}
+
+.assembler-subcategory-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: capitalize;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.6rem;
+    margin-top: 0;
+    padding-left: 0.25rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* When subcategories are in a grid, cards stack vertically within each */
+.assembler-subcategory .assembler-group-grid {
+    grid-template-columns: 1fr;
+}
+
+.assembler-group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.35rem;
+}
+
+/* Cards — single-line, expand on hover */
+.assembler-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    position: relative;
+}
+
+.assembler-card:hover {
+    border-color: #444;
+    border-radius: 6px 6px 0 0;
+    z-index: 10;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.assembler-card.selected {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 1px var(--primary-color), 0 0 12px rgba(0, 177, 49, 0.15);
+}
+
+.assembler-card.selected:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 1px var(--primary-color), 0 4px 12px rgba(0, 177, 49, 0.2);
+}
+
+/* Main row: [star][icon][name]  ...  [env][check] */
+.card-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 28px;
+}
+
+.card-star {
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+/* Card icons (brand logos and emojis) */
+.card-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.card-icon-emoji {
+    font-size: 0.9rem;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 16px;
+    text-align: center;
+}
+
+.card-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-color);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-row-right {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.card-env-badge {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* Custom check indicator */
+.card-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1.5px solid var(--border-color);
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+
+.assembler-card:hover .card-check {
+    border-color: #555;
+}
+
+.assembler-card.selected .card-check {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+}
+
+.assembler-card.selected .card-check::after {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 7px;
+    border: solid #000;
+    border-width: 0 1.5px 1.5px 0;
+    transform: rotate(45deg) translate(-0.5px, -0.5px);
+}
+
+/* Expandable detail — absolute overlay, no layout shift */
+.card-expand {
+    position: absolute;
+    left: -1.5px;
+    right: -1.5px;
+    top: 100%;
+    background: var(--bg-card);
+    border: 2px solid #444;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    padding: 0.4rem 0.75rem 0.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    z-index: 10;
+}
+
+.assembler-card:hover .card-expand {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.assembler-card.selected .card-expand {
+    border-color: var(--primary-color);
+}
+
+.card-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin: 0 0 0.35rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-tags {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+}
+
+.card-tag {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    background: var(--bg-code);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+}
+
+/* Bottom action bar */
+.assembler-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.assembler-bar-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.assembler-envvars {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.assembler-bar-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.assembler-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+}
+
+.assembler-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.assembler-btn-primary {
+    background: var(--primary-color);
+    color: #000;
+}
+
+.assembler-btn-primary:hover:not(:disabled) {
+    background: var(--primary-light);
+    box-shadow: 0 0 12px rgba(0, 177, 49, 0.3);
+}
+
+.assembler-btn-secondary {
+    background: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.assembler-btn-secondary:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Loading / error / empty states */
+.assembler-loading,
+.assembler-error,
+.assembler-empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 3rem 0;
+    font-size: 1rem;
+}
+
+.assembler-error button {
+    margin-left: 0.5rem;
+    color: var(--primary-color);
+    background: none;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .assembler {
+        padding: 2.5rem 0 7rem;
+    }
+
+    .assembler-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .assembler-search {
+        margin-left: 0;
+    }
+
+    .assembler-search input {
+        width: 100%;
+    }
+
+    .assembler-group-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .assembler-subcategories {
+        grid-template-columns: 1fr;
+    }
+
+    .assembler-bar {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .assembler-bar-info {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .assembler-bar-actions {
+        width: 100%;
+    }
+
+    .assembler-btn {
+        flex: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-tabs {
+        gap: 0.2rem;
+    }
+
+    .filter-tab {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+
+    .assembler-group-grid {
+        gap: 0.3rem;
+    }
+
+    .assembler-card {
+        padding: 0.4rem 0.6rem;
     }
 }

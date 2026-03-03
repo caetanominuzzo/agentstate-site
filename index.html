@@ -11,54 +11,63 @@
     <main>
         <section class="hero">
             <div class="container">
-                <div class="hero-grid">
-                    <div class="hero-title">
-                        <h1>Agent State</h1>
-                        <p class="hero-subtitle">A Standard for Persistent Agent State</p>
-                    </div>
-                    <div class="hero-code">
-                        <div class="code-block">
-                            <button class="copy-btn" aria-label="Copy to clipboard">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5.5 3.5H3.5C2.67157 3.5 2 4.17157 2 5V12.5C2 13.3284 2.67157 14 3.5 14H11C11.8284 14 12.5 13.3284 12.5 12.5V10.5M5.5 3.5C5.5 2.67157 6.17157 2 7 2H9.5M5.5 3.5C5.5 4.32843 6.17157 5 7 5H9.5M9.5 2H12.5C13.3284 2 14 2.67157 14 3.5V7M9.5 2V5M9.5 5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                </svg>
-                            </button>
-                            <pre><code># AGENTS.md
+                <h1>Agent State</h1>
+                <p class="hero-subtitle">A Standard for Persistent Agent State</p>
 
-You have ownership of this organization's agentstate repository. There you can store tools, scripts, persistent memory, utilities, and organizational context shared by all agents in this organization.
+                <div class="hero-description">
+                    <p class="lead">
+                        Designed to give your agents a real, persistent memory layer—like a developer's shared toolbox, so they stay consistent, reuse knowledge, and work smarter across sessions and projects.
+                    </p>
+                    <p>
+                        A dedicated Git repository that stores tools, scripts, utilities, org-wide context, and long-term memory.
+                        A standard way for agents to keep shared state, avoid duplication, and collaborate through a familiar developer workflow.
+                    </p>
+                    <p>
+                        Fork the template and organize your tools and context inside it.
+                        Tell your agents they own this repository, commit often using conventional commits, and use scoped AGENTS.md files per folder to maintain clarity.
+                        Agents will read from and write to this repo to preserve continuity.
+                    </p>
+                </div>
 
-Search before creating. Save helper scripts and organizational information (developer usernames, system ownership, PM context) to this repository. Commit frequently with conventional commit format. Maintain consistent naming and check for duplicates. Use scoped AGENTS.md files per folder as needed.</code></pre>
-                        </div>
-                        <div class="fork-command">
-                            <div class="code-block">
-                                <button class="copy-btn" aria-label="Copy to clipboard">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M5.5 3.5H3.5C2.67157 3.5 2 4.17157 2 5V12.5C2 13.3284 2.67157 14 3.5 14H11C11.8284 14 12.5 13.3284 12.5 12.5V10.5M5.5 3.5C5.5 2.67157 6.17157 2 7 2H9.5M5.5 3.5C5.5 4.32843 6.17157 5 7 5H9.5M9.5 2H12.5C13.3284 2 14 2.67157 14 3.5V7M9.5 2V5M9.5 5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                    </svg>
-                                </button>
-                                <pre><code>gh repo fork caetanominuzzo/agentstate-template</code></pre>
-                            </div>
-                        </div>
+                <div class="hero-actions">
+                    <a href="#content" class="hero-see-more">See more</a>
+                    <a href="#assembler" class="hero-build-btn"><svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Build your own</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="assembler" class="assembler">
+            <div class="container assembler-container">
+                <h2>Build Your Agent State</h2>
+                <p class="assembler-subtitle">Select tools, skills, and integrations. Download as ZIP or create a GitHub repo.</p>
+
+                <div class="assembler-toolbar">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-category="all">All</button>
                     </div>
-                    <div class="hero-description">
-                        <p class="lead">
-                            Designed to give your agents a real, persistent memory layer—like a developer's shared toolbox, so they stay consistent, reuse knowledge, and work smarter across sessions and projects.
-                        </p>
-                        <p>
-                            A dedicated Git repository that stores tools, scripts, utilities, org-wide context, and long-term memory.
-                            A standard way for agents to keep shared state, avoid duplication, and collaborate through a familiar developer workflow.
-                        </p>
-                        <p>
-                            Fork the template and organize your tools and context inside it.
-                            Tell your agents they own this repository, commit often using conventional commits, and use scoped AGENTS.md files per folder to maintain clarity.
-                            Agents will read from and write to this repo to preserve continuity.
-                        </p>
+                    <div class="assembler-search">
+                        <input type="text" id="assembler-search" placeholder="Search tools..." autocomplete="off">
+                    </div>
+                </div>
+
+                <div id="assembler-grid" class="assembler-grid">
+                    <div class="assembler-loading">Loading collection...</div>
+                </div>
+
+                <div id="assembler-bar" class="assembler-bar">
+                    <div class="assembler-bar-info">
+                        <span id="assembler-count">0 selected</span>
+                        <span id="assembler-envvars" class="assembler-envvars"></span>
+                    </div>
+                    <div class="assembler-bar-actions">
+                        <button id="btn-download-zip" class="assembler-btn assembler-btn-primary" disabled>Download ZIP</button>
+                        <button id="btn-create-repo" class="assembler-btn assembler-btn-secondary" disabled><svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Create GitHub Repo</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="content">
+        <section id="content" class="content">
             <div class="container">
                 <h2>The Problem We Solved</h2>
                 <p>
@@ -339,15 +348,16 @@ Search before creating. Save helper scripts and organizational information (deve
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const copyButtons = document.querySelectorAll('.copy-btn');
-            
+
             copyButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const codeBlock = this.nextElementSibling;
                     const code = codeBlock.querySelector('code').textContent;
-                    
+
                     navigator.clipboard.writeText(code).then(() => {
                         const originalHTML = this.innerHTML;
                         this.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -359,5 +369,6 @@ Search before creating. Save helper scripts and organizational information (deve
             });
         });
     </script>
+    <script src="assembler.js"></script>
 </body>
 </html>
