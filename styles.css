@@ -994,7 +994,13 @@ footer a:hover {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 666px) {
+    .assembler-columns {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 500px) {
     .filter-tabs {
         gap: 0.2rem;
     }
