@@ -282,7 +282,7 @@
       if (!resp.ok) throw new Error(resp.statusText);
       collection = await resp.json();
       var totalEl = document.getElementById('assembler-total');
-      if (totalEl) totalEl.textContent = '(' + (collection.items || []).length + ' items)';
+      if (totalEl) totalEl.textContent = '(' + (collection.items || []).length + ' tools & integrations)';
       renderFilterTabs();
       renderGrid();
     } catch (e) {
