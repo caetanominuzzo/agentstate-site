@@ -650,7 +650,7 @@ footer a:hover {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    padding: 0.6rem 0.75rem;
+    padding: 0.85rem 0.75rem;
     cursor: pointer;
     transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
     position: relative;
