@@ -640,7 +640,7 @@ footer a:hover {
 .assembler-subgroup-title {
     font-size: 0.7rem;
     font-weight: 600;
-    color: var(--text-muted);
+    color: var(--text-light);
     text-transform: capitalize;
     letter-spacing: 0.03em;
     margin: 0 0 0.35rem 0.1rem;
