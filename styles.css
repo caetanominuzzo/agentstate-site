@@ -650,11 +650,11 @@ footer a:hover {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    padding: 0.5rem 0.6rem;
+    padding: 0.6rem 0.75rem;
     cursor: pointer;
     transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
     position: relative;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
     min-height: 48px;
     display: flex;
     align-items: center;
