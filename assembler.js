@@ -345,18 +345,12 @@
       });
     }
 
-    // Group into 2-level hierarchy: category → subcategory (optional)
+    // Group by category, flatten subcategories
     var catMap = {};
     items.forEach(function (item) {
       var cat = item.category;
-      if (!catMap[cat]) catMap[cat] = { noSub: [], subs: {} };
-      var sub = item.subcategory || '';
-      if (sub) {
-        if (!catMap[cat].subs[sub]) catMap[cat].subs[sub] = [];
-        catMap[cat].subs[sub].push(item);
-      } else {
-        catMap[cat].noSub.push(item);
-      }
+      if (!catMap[cat]) catMap[cat] = [];
+      catMap[cat].push(item);
     });
 
     var html = '';
@@ -367,7 +361,6 @@
       categoryOrder.push(c.id);
     });
 
-    // Sort categories by the order defined in collection, then alphabetically for extras
     var sortedCats = Object.keys(catMap).sort(function (a, b) {
       var ia = categoryOrder.indexOf(a);
       var ib = categoryOrder.indexOf(b);
@@ -377,35 +370,20 @@
     });
 
     sortedCats.forEach(function (cat) {
-      var group = catMap[cat];
+      var catItems = catMap[cat];
       var catTitle = categoryNames[cat] || capitalize(cat);
-      var hasSubs = Object.keys(group.subs).length > 0;
+
+      // Sort by subcategory then name for visual grouping
+      catItems.sort(function (a, b) {
+        var sa = (a.subcategory || '').localeCompare(b.subcategory || '');
+        return sa !== 0 ? sa : a.name.localeCompare(b.name);
+      });
 
       html += '<div class="assembler-category">';
       html += '<h3 class="assembler-category-title">' + escapeHtml(catTitle) + '</h3>';
-
-      // Items without subcategory go directly under the category
-      if (group.noSub.length > 0) {
-        html += '<div class="assembler-group-grid">';
-        group.noSub.forEach(function (item) { html += renderCard(item); });
-        html += '</div>';
-      }
-
-      // Subcategory groups — flow side by side
-      if (hasSubs) {
-        html += '<div class="assembler-subcategories">';
-        var subKeys = Object.keys(group.subs).sort();
-        subKeys.forEach(function (sub) {
-          html += '<div class="assembler-subcategory">';
-          html += '<h4 class="assembler-subcategory-title">' + escapeHtml(sub.replace(/-/g, ' ')) + '</h4>';
-          html += '<div class="assembler-group-grid">';
-          group.subs[sub].forEach(function (item) { html += renderCard(item); });
-          html += '</div>';
-          html += '</div>';
-        });
-        html += '</div>';
-      }
-
+      html += '<div class="assembler-group-grid">';
+      catItems.forEach(function (item) { html += renderCard(item); });
+      html += '</div>';
       html += '</div>';
     });
 
@@ -452,6 +430,9 @@
       .join('');
 
     var icon = getItemIcon(item);
+    var subLabel = item.subcategory
+      ? '<span class="card-sub">' + escapeHtml(item.subcategory.replace(/-/g, ' ')) + '</span>'
+      : '';
 
     return (
       '<div class="assembler-card' + checked + '" data-id="' + escapeHtml(item.id) + '">' +
@@ -461,6 +442,7 @@
       '<span class="card-name">' + escapeHtml(item.name) + '</span>' +
       '<span class="card-row-right"><span class="card-info-btn" title="Details">?</span>' + envBadge + star + '</span>' +
       '</div>' +
+      subLabel +
       '<div class="card-expand">' +
       '<p class="card-desc">' + escapeHtml(item.description) + '</p>' +
       '<div class="card-tags">' + tags + '</div>' +

@@ -625,33 +625,14 @@ footer a:hover {
     border-bottom: 2px solid var(--primary-color);
 }
 
-/* Subcategories flow side by side */
-.assembler-subcategories {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.25rem;
-}
-
-.assembler-subcategory {
-    margin-bottom: 0;
-}
-
-.assembler-subcategory-title {
-    font-size: 0.8rem;
-    font-weight: 600;
+/* Subcategory chip on card */
+.card-sub {
+    display: inline-block;
+    font-size: 0.6rem;
     color: var(--text-muted);
     text-transform: capitalize;
-    letter-spacing: 0.03em;
-    margin-bottom: 0.6rem;
-    margin-top: 0;
-    padding-left: 0.25rem;
-    padding-bottom: 0.35rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-/* When subcategories are in a grid, cards stack vertically within each */
-.assembler-subcategory .assembler-group-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    margin-top: 0.2rem;
+    padding-left: 20px; /* align with name (past checkbox) */
 }
 
 .assembler-group-grid {
@@ -982,14 +963,6 @@ footer a:hover {
     }
 
     .assembler-group-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .assembler-subcategories {
-        grid-template-columns: 1fr;
-    }
-
-    .assembler-subcategory .assembler-group-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
