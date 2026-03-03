@@ -946,6 +946,12 @@ footer a:hover {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .assembler-columns {
+        column-count: 4;
+    }
+}
+
 @media (max-width: 768px) {
     .assembler {
         padding: 2.5rem 0 7rem;
