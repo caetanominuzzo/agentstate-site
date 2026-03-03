@@ -627,7 +627,7 @@ footer a:hover {
 
 /* Multi-column flow for subcategory blocks */
 .assembler-columns {
-    column-count: 4;
+    column-count: 5;
     column-gap: 0.75rem;
 }
 
@@ -650,11 +650,14 @@ footer a:hover {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    padding: 0.45rem 0.6rem;
+    padding: 0.5rem 0.6rem;
     cursor: pointer;
     transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
     position: relative;
     margin-bottom: 0.3rem;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
 }
 
 .assembler-card:hover {
@@ -684,6 +687,7 @@ footer a:hover {
     display: flex;
     align-items: center;
     gap: 0.4rem;
+    width: 100%;
 }
 
 .card-star {
@@ -713,12 +717,12 @@ footer a:hover {
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--text-color);
-    line-height: 1.2;
+    line-height: 1.3;
     flex: 1;
     min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .card-row-right {
@@ -962,7 +966,7 @@ footer a:hover {
     }
 
     .assembler-columns {
-        column-count: 2;
+        column-count: 3;
     }
 
     .assembler-bar {
