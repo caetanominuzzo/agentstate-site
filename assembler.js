@@ -19,6 +19,12 @@
   // ---------------------------------------------------------------------------
   var SIMPLE_ICONS_CDN = 'https://cdn.simpleicons.org';
 
+  // Local SVG icons (for brands not on Simple Icons)
+  var LOCAL_ICONS = {
+    'openai-integration': 'assets/openai.svg',
+    'groq-integration':   'assets/groq.svg',
+  };
+
   // Map item id → { slug, color } for Simple Icons brand logos
   var BRAND_ICONS = {
     // Existing (skills)
@@ -31,10 +37,7 @@
     'mermaid-diagrams':          { slug: 'mermaid',     color: 'FF3670' },
 
     // Tier 1 — notifications & email
-    'slack-integration':                  { slug: 'slack',            color: '4A154B' },
     'discord-integration':                { slug: 'discord',          color: '5865F2' },
-    'microsoft-teams-integration':        { slug: 'microsoftteams',   color: '6264A7' },
-    'sendgrid-integration':               { slug: 'sendgrid',         color: '51A9E3' },
     'resend-integration':                 { slug: 'resend',           color: '000000' },
 
     // Tier 1 — code hosting & CI/CD
@@ -58,10 +61,8 @@
     'cloudflare-integration':             { slug: 'cloudflare',       color: 'F38020' },
     'supabase-integration':               { slug: 'supabase',         color: '3FCF8E' },
     'upstash-integration':                { slug: 'upstash',          color: '00E9A3' },
-    'neon-integration':                   { slug: 'neon',             color: '00E599' },
 
     // Tier 1 — AI/ML
-    'openai-integration':                 { slug: 'openai',           color: 'ffffff' },
     'anthropic-integration':              { slug: 'anthropic',        color: 'ffffff' },
 
     // Tier 1 — finance
@@ -70,6 +71,7 @@
     // Tier 2 — code hosting
     'gitlab-integration':                 { slug: 'gitlab',           color: 'FC6D26' },
     'bitbucket-integration':              { slug: 'bitbucket',        color: '0052CC' },
+
     // Tier 2 — CI/CD
     'circleci-integration':               { slug: 'circleci',         color: '343434' },
     'railway-integration':                { slug: 'railway',          color: '0B0D0E' },
@@ -80,7 +82,6 @@
     'asana-integration':                  { slug: 'asana',            color: 'F06A6A' },
     'trello-integration':                 { slug: 'trello',           color: '0052CC' },
     'clickup-integration':                { slug: 'clickup',          color: '7B68EE' },
-    'monday-integration':                 { slug: 'mondaydotcom',     color: 'FFCC00' },
 
     // Tier 2 — documentation
     'confluence-integration':             { slug: 'confluence',       color: '172B4D' },
@@ -99,11 +100,7 @@
 
     // Tier 2 — CRM & support
     'hubspot-integration':                { slug: 'hubspot',          color: 'FF7A59' },
-    'salesforce-integration':             { slug: 'salesforce',       color: '00A1E0' },
     'zendesk-integration':                { slug: 'zendesk',          color: '03363D' },
-
-    // Tier 2 — notifications
-    'twilio-integration':                 { slug: 'twilio',           color: 'F22F46' },
 
     // Tier 2 — email
     'mailgun-integration':                { slug: 'mailgun',          color: 'F06B66' },
@@ -112,21 +109,16 @@
     'figma-integration':                  { slug: 'figma',            color: 'F24E1E' },
 
     // Tier 2 — AI/ML
-    'groq-integration':                   { slug: 'groq',             color: 'F55036' },
     'google-gemini-integration':          { slug: 'googlegemini',     color: '8E75B2' },
-    'perplexity-integration':             { slug: 'perplexity',       color: '1FB8CD' },
-    'pinecone-integration':               { slug: 'pinecone',         color: '000000' },
 
     // Tier 2 — security
     'snyk-integration':                   { slug: 'snyk',             color: '4C4A73' },
-    'sonarcloud-integration':             { slug: 'sonarcloud',       color: 'F3702A' },
 
     // Tier 2 — cloud
     'docker-hub-integration':             { slug: 'docker',           color: '2496ED' },
 
     // Tier 2 — auth & secrets
     'vault-integration':                  { slug: 'vault',            color: 'FFEC6E' },
-    'doppler-integration':                { slug: 'doppler',          color: '000000' },
 
     // Tier 2 — search
     'algolia-integration':                { slug: 'algolia',          color: '003DFF' },
@@ -134,9 +126,6 @@
     // Tier 2 — package registries
     'npm-registry-integration':            { slug: 'npm',              color: 'CB3837' },
     'pypi-integration':                   { slug: 'pypi',             color: '3775A9' },
-
-    // Tier 2 — feature flags
-    'launchdarkly-integration':           { slug: 'launchdarkly',     color: '3DD6F5' },
   };
 
   // Map item id → { slug, color } for tech-tags based brand icons
@@ -243,6 +232,11 @@
   };
 
   function getItemIcon(item) {
+    // 0. Local SVG icons
+    if (LOCAL_ICONS[item.id]) {
+      return '<img class="card-icon" src="' + LOCAL_ICONS[item.id] + '" alt="" width="18" height="18">';
+    }
+
     // 1. Brand logo via Simple Icons
     if (BRAND_ICONS[item.id]) {
       var b = BRAND_ICONS[item.id];
