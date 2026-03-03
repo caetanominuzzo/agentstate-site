@@ -417,6 +417,19 @@
 
     // Attach card click handlers
     grid.querySelectorAll('.assembler-card').forEach(function (card) {
+      // Info button toggles expand
+      var infoBtn = card.querySelector('.card-info-btn');
+      if (infoBtn) {
+        infoBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          card.classList.toggle('expanded');
+        });
+      }
+      // Mouseleave collapses
+      card.addEventListener('mouseleave', function () {
+        card.classList.remove('expanded');
+      });
+      // Card click toggles selection
       card.addEventListener('click', function () {
         toggleItem(card.dataset.id);
       });
@@ -446,7 +459,7 @@
       '<span class="card-check" aria-hidden="true"></span>' +
       icon +
       '<span class="card-name">' + escapeHtml(item.name) + '</span>' +
-      '<span class="card-row-right">' + envBadge + star + '</span>' +
+      '<span class="card-row-right"><span class="card-info-btn" title="Details">?</span>' + envBadge + star + '</span>' +
       '</div>' +
       '<div class="card-expand">' +
       '<p class="card-desc">' + escapeHtml(item.description) + '</p>' +
