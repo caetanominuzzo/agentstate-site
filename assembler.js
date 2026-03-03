@@ -470,18 +470,28 @@
   // Selection
   // ---------------------------------------------------------------------------
   function toggleItem(id) {
-    if (selectedIds.has(id)) {
+    var wasSelected = selectedIds.has(id);
+    var depsAdded = [];
+    if (wasSelected) {
       selectedIds.delete(id);
     } else {
       selectedIds.add(id);
       // Auto-select dependencies
       var item = collection.items.find(function (i) { return i.id === id; });
       if (item && item.depends_on) {
-        item.depends_on.forEach(function (dep) { selectedIds.add(dep); });
+        item.depends_on.forEach(function (dep) {
+          if (!selectedIds.has(dep)) { selectedIds.add(dep); depsAdded.push(dep); }
+        });
       }
     }
+    // Update DOM directly instead of re-rendering
+    var card = grid.querySelector('.assembler-card[data-id="' + id + '"]');
+    if (card) card.classList.toggle('selected', !wasSelected);
+    depsAdded.forEach(function (dep) {
+      var depCard = grid.querySelector('.assembler-card[data-id="' + dep + '"]');
+      if (depCard) depCard.classList.add('selected');
+    });
     updateBar();
-    renderGrid();
   }
 
   function getSelectedItems() {
@@ -992,10 +1002,10 @@
   // ---------------------------------------------------------------------------
   // Utilities
   // ---------------------------------------------------------------------------
+  var _escapeEl = document.createElement('div');
   function escapeHtml(str) {
-    var div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
+    _escapeEl.textContent = str;
+    return _escapeEl.innerHTML;
   }
 
   function capitalize(str) {

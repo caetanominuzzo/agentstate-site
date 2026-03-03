@@ -629,6 +629,7 @@ footer a:hover {
 .assembler-columns {
     column-count: 5;
     column-gap: 0.75rem;
+    contain: layout style;
 }
 
 .assembler-subgroup {
@@ -652,7 +653,7 @@ footer a:hover {
     border-radius: 6px;
     padding: 0.85rem 0.75rem;
     cursor: pointer;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
     position: relative;
     margin-bottom: 0.5rem;
     min-height: 48px;
@@ -662,9 +663,7 @@ footer a:hover {
 
 .assembler-card:hover {
     border-color: #444;
-    z-index: 10;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .assembler-card.expanded {
