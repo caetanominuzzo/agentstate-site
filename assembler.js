@@ -281,6 +281,8 @@
       const resp = await fetch(COLLECTION_URL);
       if (!resp.ok) throw new Error(resp.statusText);
       collection = await resp.json();
+      var totalEl = document.getElementById('assembler-total');
+      if (totalEl) totalEl.textContent = '(' + (collection.items || []).length + ' items)';
       renderFilterTabs();
       renderGrid();
     } catch (e) {
