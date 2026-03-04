@@ -422,6 +422,34 @@
 
     grid.innerHTML = html;
 
+    // Attach select-all handlers
+    grid.querySelectorAll('.select-all-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var cat = btn.dataset.category;
+        var catCards = grid.querySelectorAll('.assembler-category');
+        catCards.forEach(function (section) {
+          var header = section.querySelector('.select-all-btn');
+          if (!header || header.dataset.category !== cat) return;
+          var cards = section.querySelectorAll('.assembler-card');
+          // If all are selected, deselect all; otherwise select all
+          var allSelected = true;
+          cards.forEach(function (c) {
+            if (!selectedIds.has(c.dataset.id)) allSelected = false;
+          });
+          cards.forEach(function (c) {
+            if (allSelected) {
+              selectedIds.delete(c.dataset.id);
+              c.classList.remove('selected');
+            } else {
+              selectedIds.add(c.dataset.id);
+              c.classList.add('selected');
+            }
+          });
+        });
+        updateBar();
+      });
+    });
+
     // Attach card click handlers
     grid.querySelectorAll('.assembler-card').forEach(function (card) {
       // Info button toggles expand
