@@ -56,7 +56,8 @@ body {
 /* Hero Section — simple stacked layout */
 .hero {
     padding: 4rem 0 3rem;
-    background-color: var(--bg-color);
+    background-color: #0A0A0A;
+    border-bottom: .1px solid var(--primary-color);
 }
 
 .hero .container {
@@ -73,19 +74,18 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 400;
-    margin: 1.5rem 0 1.5rem 0;
     color: var(--text-light);
     letter-spacing: 0.01em;
 }
 
 .hero-description {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .hero-description .lead {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 400;
     color: var(--text-light);
     margin-bottom: 1.5rem;
@@ -93,7 +93,7 @@ body {
 }
 
 .hero-description p {
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: var(--text-light);
     line-height: 1.8;
     margin-bottom: 1.5rem;

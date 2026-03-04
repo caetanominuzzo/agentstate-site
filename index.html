@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent State - A Standard for Persistent Agent State</title>
-    <meta name="description" content="Agent State is a standard for managing persistent state, tools, and long-term memory for LLM agents through a dedicated Git repository.">
+    <title>Agent State - An Open Toolbox for AI Agents</title>
+    <meta name="description" content="100+ integrations, skills, and tools for AI agents. Plain Python scripts, versioned in Git. No protocols, no vendor lock-in. Works with Claude Code, Devin, Cursor, and more.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <main>
         <section class="hero">
             <div class="container">
-                <h1>Agent State <span id="assembler-total" style="font-size:0.4em;font-weight:400;color:var(--text-muted)"></span></h1>
-                <p class="hero-subtitle">A Standard for Persistent Agent State</p>
+                <h1>Agent State</h1>
+                <p class="hero-subtitle">An open toolbox for AI agents / <span id="assembler-total"></span></p>
 
                 <div class="hero-description">
                     <p class="lead">
-                        Designed to give your agents a real, persistent memory layer—like a developer's shared toolbox, so they stay consistent, reuse knowledge, and work smarter across sessions and projects.
+                        Agent State started as a Git repository for persisting agent memory and organizational context across sessions.
+                        It grew into a collection of integrations, skills, and knowledge, all as plain Python scripts and markdown files.
                     </p>
                     <p>
-                        A dedicated Git repository that stores tools, scripts, utilities, org-wide context, and long-term memory.
-                        A standard way for agents to keep shared state, avoid duplication, and collaborate through a familiar developer workflow.
+                        Pick what you need, set your API keys, and your agents talk to Jira, Sentry, Stripe, GitHub,
+                        and 60+ other services. No frameworks, no protocol negotiation.
                     </p>
                     <p>
-                        Fork the template and organize your tools and context inside it.
-                        Tell your agents they own this repository, commit often using conventional commits, and use scoped AGENTS.md files per folder to maintain clarity.
-                        Agents will read from and write to this repo to preserve continuity.
+                        Works with Claude Code, Devin, Cursor, Windsurf, Copilot, Antigravity, and any agent
+                        that can run Python scripts.
                     </p>
                 </div>
 
@@ -38,8 +38,8 @@
 
         <section id="assembler" class="assembler">
             <div class="container assembler-container">
-                <h2>Build Your Agent State</h2>
-                <p class="assembler-subtitle">Select tools, skills, and integrations. Download as ZIP or create a GitHub repo.</p>
+                <h2>Build Your Toolbox</h2>
+                <p class="assembler-subtitle">Select integrations, skills, and tools. Download a ready-to-use repository.</p>
 
                 <div class="assembler-toolbar">
                     <div class="filter-tabs">
@@ -69,258 +69,233 @@
 
         <section id="content" class="content">
             <div class="container">
-                <h2>The Problem We Solved</h2>
+                <h2>Why Agent State Exists</h2>
                 <p>
-                    This pattern emerged inside Mottu while scaling Devin to production.
+                    Agent State started at Mottu as a shared Git repository where agents could persist what they learned:
+                    developer profiles, system ownership, helper scripts. It solved the problem of agents starting
+                    from scratch every session.
                 </p>
                 <p>
-                    Working with agents at Mottu, where we have thousands of repositories, we noticed they kept
-                    rediscovering the same information, rewriting similar scripts, and losing context between sessions.
-                    This wasted tokens and time, and created frustration.
+                    As agents needed to talk to more services (Jira, Sentry, Slack, GitHub), we kept adding
+                    Python scripts that wrapped each API. The repo grew from a memory layer into a full integration
+                    layer. Skills and behavioral modes followed.
                 </p>
                 <p>
-                    Agent State solves this by giving agents a place to store what they learn and create. When agents
-                    write helper scripts, they save them to the repository. When agents learn who owns a system or
-                    which PM worked on a project, that information persists. The next agent session, or even a
-                    different agent, can immediately access this knowledge.
+                    Meanwhile, MCP, A2A, and other agent protocols appeared with competing standards,
+                    breaking changes, and complex configurations. We already had a simpler answer:
+                    standalone scripts, one per vendor, authenticated with environment variables,
+                    versioned in Git. Just <code>python jira_cli.py search --query "bug"</code>.
                 </p>
-                <p>This creates a compounding effect:</p>
                 <ul class="benefits-list">
                     <li>
-                        <strong>Scripts accumulate</strong> Tools and helpers written by agents are saved directly
-                        and reused automatically in future sessions.
+                        <strong>Plain scripts</strong> Each integration is a single Python file. Read it, modify it, replace it.
                     </li>
                     <li>
-                        <strong>Knowledge builds</strong> Context about developers, PMs, systems, and processes
-                        accumulates over time, making agents smarter with each interaction.
+                        <strong>Versioned in Git</strong> Every change is a commit. Roll back, branch, diff.
                     </li>
                     <li>
-                        <strong>Context persists</strong> Agents don't start from scratch; they build on previous
-                        work and stored knowledge from any agent in the organization.
+                        <strong>Community-driven</strong> 100+ items maintained through pull requests.
+                    </li>
+                    <li>
+                        <strong>No lock-in</strong> No framework, no runtime, no SDK. Move scripts anywhere.
+                    </li>
+                    <li>
+                        <strong>Any agent</strong> If it can run <code>python script.py</code>, it works.
                     </li>
                 </ul>
 
-                <h2>Examples</h2>
-                <p>These are from our actual use at Mottu, not hypotheticals:</p>
+                <h2>How It Works</h2>
 
-                <h3>Reusable Helper Scripts</h3>
+                <h3>Each script is a self-contained CLI</h3>
                 <p>
-                    When an agent struggled with Jira, it wrote a Python helper. Initially, this helper lived as a Devin memory,
-                    requiring regeneration from memory each time it was needed.
+                    Every integration follows the same pattern: a single Python file with argparse commands,
+                    environment variables for authentication, and JSON output. Agents call them like any CLI tool.
                 </p>
-                <p>
-                    When the agent first accessed the script from its knowledge base memory, it immediately wrote a persistent version
-                    to the Agent State repository. Now that helper is automatically reused in every session without needing to be regenerated.
-                </p>
-                <p class="example-note">
-                    Scripts give agents direct access to APIs and external services. Agent State makes these integrations persistent,
-                    so agents don't rebuild the same connections every session.
-                </p>
-
-                <h3>Organizational Memory</h3>
-                <p>
-                    The Agent State repo stores each developer's and PM's GitHub username, the systems they touched,
-                    and their Jira context. Agents can answer questions like "who owns system X" or
-                    "which PM worked on process Y."
-                </p>
-                <p class="example-note">
-                    This organizational memory also enables agents to properly label and add co-authors to PRs,
-                    allowing for better data and attribution in dev lake. Agents can automatically identify
-                    relevant stakeholders and ensure proper credit is given based on the stored organizational context.
-                </p>
-
-                <h3>Automatic Inference</h3>
-                <p>
-                    When an agent has access to hundreds or thousands of repositories, users typically need to specify
-                    which one to work on for each task. With Agent State, the agent loads the user's profile from
-                    organizational memory, sees which repositories this user has worked on recently and what each one
-                    does, and matches the new task to the right repo on its own.
-                </p>
-                <p class="example-note">
-                    This works when the organizational memory is well-maintained and the task description is clear enough
-                    to match against stored context. It's not magic—it's the agent reasoning over structured data instead
-                    of starting blind.
-                </p>
-
-                <h3>Orchestrator and Sub-Agent Spawning</h3>
-                <p>
-                    One tool in our Agent State is an orchestrator prompt that uses the Devin API client to spawn sub-agents
-                    for breaking down large tasks, or even spawn a new session for itself, summarizing and creating a new session
-                    to keep the general context of a single session under limits.
-                </p>
-                <p>
-                    By setting these limits in AGENTS.md, we direct agents to automatically perform this spawning both for large tasks
-                    and when approaching context limits or ACU limits for Devin.
-                </p>
-                <p class="example-note">
-                    The <code>devin_api_client.py</code> script in the Agent State repository enables agents to manage their own
-                    lifecycle, automatically creating new sessions when needed to maintain efficiency and stay within resource constraints.
-                </p>
-
-                <h3>Environment Secrets and Configuration</h3>
-                <p>
-                    Scripts in the Agent State repository can use environment secrets defined in Devin secrets (for Devin) or locally
-                    configured environment variables (for Windsurf and Cursor). This allows scripts to securely access APIs, credentials,
-                    and other sensitive configuration without hardcoding values.
-                </p>
-                <p class="example-note">
-                    Agents can access these secrets through standard environment variable patterns, making scripts portable across
-                    different agent environments while maintaining security best practices.
-                    For Keycloak/OIDC environments, <a href="https://pypi.org/project/sso-cli/" target="_blank" rel="noopener">sso-cli</a>
-                    lets agents fetch auth tokens on demand without storing credentials.
-                </p>
-
-                <h2>Limitations & Considerations</h2>
-                <p>
-                    This pattern emerged from real production use. Here's what we've learned about its rough edges.
-                </p>
-
-                <h3>Cross-Repository Access</h3>
-                <p>
-                    For local agents like Cursor, Windsurf, or Claude Code to use the Agent State repo, developers
-                    need write access to it. But any user with access to the agent system gets indirect access to all
-                    repositories configured on that agent's machine.
-                </p>
-                <p>
-                    This is the same limitation as Devin's team plan, where all team members with Devin access
-                    share indirect access to every repository configured in Devin's environment.
-                </p>
-                <p class="example-note">
-                    Scope access carefully. Consider who can instruct the agent and what repositories are reachable
-                    from that agent's environment. Treat agent access as a shared credential.
-                </p>
-
-                <h3>Concurrent Write Conflicts</h3>
-                <p>
-                    Multiple agents writing to the same Agent State repo simultaneously can cause Git merge conflicts.
-                    Git handles some of this naturally, but at scale—many agents, frequent commits—conflicts require
-                    operational attention.
-                </p>
-                <p class="example-note">
-                    Strategies include using branches per agent or per session, accepting that some manual conflict
-                    resolution will be needed, or partitioning the repo by team.
-                </p>
-
-                <h3>State Quality and Drift</h3>
-                <p>
-                    There is no validation layer. Agents can write incorrect, outdated, or contradictory information
-                    to the repo. Over time, state can drift from reality—outdated developer mappings, deprecated scripts
-                    that still get referenced, conflicting context across files.
-                </p>
-                <p class="example-note">
-                    Treat the Agent State repo like shared documentation: review it periodically, prune what's stale,
-                    and correct what's wrong. This is maintenance work that doesn't go away.
-                </p>
-
-                <h3>No Fine-Grained Access Control</h3>
-                <p>
-                    The repo is all-or-nothing. There's no built-in way to restrict which agents or users can see
-                    specific files within the Agent State repo. Organizational data—developer names, system ownership,
-                    PM context—is visible to anyone with repo access.
-                </p>
-                <p class="example-note">
-                    For teams needing isolation between groups or projects, maintain multiple Agent State repositories
-                    with different access scopes rather than trying to restrict within a single repo.
-                </p>
-
-                <h3>Context Window Pressure</h3>
-                <p>
-                    As the Agent State repo grows, agents may struggle to effectively use all of it within their
-                    context window. A large, disorganized repo can actually hurt performance by overwhelming the agent
-                    with too much information, leading to worse results than having no shared state at all.
-                </p>
-                <p class="example-note">
-                    Keep the repo well-organized and actively pruned. Use scoped AGENTS.md files to guide agents to
-                    relevant sections. Bigger is not always better—curate ruthlessly.
-                </p>
-
-                <h3>Script Security</h3>
-                <p>
-                    Scripts stored in the Agent State repo run with the agent's full permissions. A buggy or poorly
-                    written script can cause damage across repositories—deleting branches, pushing broken code, or
-                    leaking secrets through API calls.
-                </p>
-                <p class="example-note">
-                    Extend code review practices to the Agent State repo, especially for scripts that interact with
-                    external services or modify other repositories. Agent-authored code deserves the same scrutiny as
-                    human-authored code.
-                </p>
-
-                <h2>Repository Structure</h2>
-                <p>This isn't a framework, it's a convention. Fork the <code>agentstate-template</code> repository to create your organization's Agent State repository:</p>
                 <div class="code-block">
                     <button class="copy-btn" aria-label="Copy to clipboard">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.5 3.5H3.5C2.67157 3.5 2 4.17157 2 5V12.5C2 13.3284 2.67157 14 3.5 14H11C11.8284 14 12.5 13.3284 12.5 12.5V10.5M5.5 3.5C5.5 2.67157 6.17157 2 7 2H9.5M5.5 3.5C5.5 4.32843 6.17157 5 7 5H9.5M9.5 2H12.5C13.3284 2 14 2.67157 14 3.5V7M9.5 2V5M9.5 5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                         </svg>
                     </button>
-                    <pre><code># agentstate/
-├── AGENTS.md
-├── scripts/
-│   ├── AGENTS.md  // &lt;-- Use scoped AGENTS.md per folder or as you like
-│   ├── jira_helper.py
-│   └── devin_api_client.py
-├── memory/
-│   ├── developers.json
-│   ├── pms.json
-│   └── systems.json
-├── docs/
-│   └── dev_onboarding.md
-└── context/
-    └── organizational.md</code></pre>
+                    <pre><code># List your Sentry issues
+python scripts/integrations/sentry/sentry_cli.py list-issues --status unresolved
+
+# Create a Jira ticket
+python scripts/integrations/jira/jira_cli.py create --project MYPROJ --summary "Fix auth bug"
+
+# Check GitHub Actions status
+python scripts/integrations/github-actions/github_actions_cli.py list-runs --repo my-org/my-repo</code></pre>
                 </div>
 
-                <h2>Getting Started</h2>
+                <h3>You own the repo</h3>
                 <p>
-                    Add instructions about the Agent State repository to your AGENTS.md file, or include it in your agent's
-                    knowledge base. The agent needs to know it has access to (or ownership of) this repository and should use it
-                    to store and retrieve tools, scripts, and organizational context.
-                </p>
-                <p>
-                    This works with any agent system that has filesystem and Git access. Once you tell the agent about the
-                    Agent State repository through its instructions, it will start using it to persist work across sessions
-                    and share knowledge with other agents.
-                </p>
-                <p>
-                    We've seen it work with Devin, Cursor, Windsurf, Claude Code, Antigravity, and Copilot. It should work with any agent that can
-                    interact with Git repositories.
+                    Agent State lives in your Git repository. Fork the template or build your own from the
+                    assembler above. Your agents get read/write access to this repo, and they use it to store
+                    scripts, organizational knowledge, and session context.
                 </p>
 
-                <h2>Agent State vs Agents.md</h2>
+                <h3>Environment variables, not config files</h3>
                 <p>
-                    These two standards serve different but complementary purposes:
+                    Each integration declares the API keys it needs. Set them in your <code>.env</code> file
+                    or your agent platform's secrets.
+                    For Keycloak/OIDC environments, <a href="https://pypi.org/project/sso-cli/" target="_blank" rel="noopener">sso-cli</a>
+                    fetches auth tokens on demand from the system keyring.
+                </p>
+
+                <h2>What's Inside</h2>
+                <ul class="benefits-list">
+                    <li>
+                        <strong>Integrations (64)</strong> Jira, GitHub, Sentry, Stripe, Slack, Datadog, Notion, Supabase, and 56 more.
+                        Each is a CLI tool that wraps one vendor API.
+                    </li>
+                    <li>
+                        <strong>Skills (28)</strong> Curated procedural knowledge from the <a href="https://agents.sh" target="_blank" rel="noopener">agents.sh</a> ecosystem.
+                        API design principles, debugging strategies, testing patterns, code review workflows.
+                    </li>
+                    <li>
+                        <strong>Modes (3)</strong> Behavioral profiles that change how agents operate.
+                        Analyst mode, deployment guardrails, resource limit enforcement.
+                    </li>
+                    <li>
+                        <strong>Orchestration (2)</strong> Multi-agent coordination.
+                        Session spawning, multi-layer handoff patterns.
+                    </li>
+                    <li>
+                        <strong>Knowledge (4)</strong> Templates for organizational memory: developer profiles,
+                        system ownership, glossary, domain context.
+                    </li>
+                    <li>
+                        <strong>Meta (1)</strong> Tools for the repo itself. Semantic search across your agent state.
+                    </li>
+                </ul>
+
+                <h2>Born in Production</h2>
+                <p>
+                    Agent State emerged inside Mottu while scaling AI agents across thousands of repositories.
+                    These are from our actual use, not hypotheticals:
+                </p>
+
+                <h3>Reusable integrations</h3>
+                <p>
+                    When an agent needed Jira access, it wrote a Python helper.
+                    That helper now lives in Agent State and is reused across every session,
+                    every agent, without regeneration. Scripts accumulate — agents get better over time.
+                </p>
+
+                <h3>Organizational memory</h3>
+                <p>
+                    Agents store who owns which system, which PM manages which project, and each developer's
+                    GitHub username. New sessions start with this context instead of asking. This also enables
+                    agents to properly label PRs and identify the right stakeholders automatically.
+                </p>
+
+                <h3>Self-management</h3>
+                <p>
+                    Agents use the orchestration scripts to spawn sub-sessions and manage their own resource limits.
+                    When approaching context or ACU limits, they create a new session with a summary and continue without
+                    human intervention.
+                </p>
+
+                <h2>A Different Approach</h2>
+                <p>
+                    MCP (Model Context Protocol), A2A, and similar standards aim to create universal agent-to-service
+                    communication protocols. They are ambitious and important projects.
+                    Agent State takes a deliberately simpler approach.
                 </p>
                 <p>
-                    <strong>Agents.md</strong> → how agents behave
+                    Instead of a protocol with capability negotiation, server processes, and SDK dependencies,
+                    Agent State provides standalone Python scripts. Each script wraps exactly one vendor API,
+                    authenticates via environment variables, and outputs JSON. There is no runtime to install,
+                    no server to keep running, no protocol version to track.
                 </p>
                 <p>
-                    <strong>Agent State</strong> → where agents persist knowledge
+                    Agent State is not a replacement for agent protocols in all cases.
+                    If you need real-time bidirectional communication between agents and services,
+                    a protocol may serve you better. But for the common case, an agent that needs to read
+                    Jira tickets, check Sentry errors, or post to Slack — a script is simpler, faster,
+                    and easier to debug.
                 </p>
+
+                <h2>Considerations</h2>
+
+                <h3>Script security</h3>
                 <p>
-                    In practice, your AGENTS.md file is where you tell agents about the Agent State repo.
+                    Scripts run with the agent's full permissions. Review them like code — because they are code.
+                    Agent-authored scripts deserve the same scrutiny as human-authored code.
                 </p>
+
+                <h3>Context window pressure</h3>
+                <p>
+                    A large repo can overwhelm agents. Keep it well-organized, use scoped AGENTS.md files per folder,
+                    and curate ruthlessly. Bigger is not always better.
+                </p>
+
+                <h3>Concurrent writes</h3>
+                <p>
+                    Multiple agents writing simultaneously can cause merge conflicts.
+                    Use branches per agent or per session, or partition by team.
+                </p>
+
+                <h2>Getting Started</h2>
+                <ol class="benefits-list">
+                    <li>
+                        <strong>Build your toolbox</strong> Use the <a href="#assembler">assembler above</a> to select integrations and skills, or fork the <a href="https://github.com/caetanominuzzo/agentstate-template" target="_blank" rel="noopener">template repo</a>.
+                    </li>
+                    <li>
+                        <strong>Set your API keys</strong> Run <code>./setup.sh</code> or copy <code>.env.example</code> to <code>.env</code> and fill in your keys.
+                    </li>
+                    <li>
+                        <strong>Install dependencies</strong> <code>pip install -r requirements.txt</code>
+                    </li>
+                    <li>
+                        <strong>Tell your agent</strong> Add to your AGENTS.md or agent knowledge base:
+                        <em>"You have access to the agentstate repository. Use scripts in scripts/integrations/ to interact with external services."</em>
+                    </li>
+                    <li>
+                        <strong>That's it.</strong> No protocol servers to start. No capability negotiation. Your agent can now use the tools.
+                    </li>
+                </ol>
 
                 <h2>FAQ</h2>
 
-                <h3>How do I set up an Agent State repository?</h3>
+                <h3>How is this different from MCP?</h3>
                 <p>
-                    Create a new Git repository in your organization. You can structure it however makes sense
-                    for your needs, but a common structure includes folders for scripts, memory, docs, and context.
-                    All agents in your organization should have access to this repository.
+                    MCP is a protocol for agent-to-service communication. Agent State is a collection of scripts.
+                    MCP requires a server process and protocol negotiation; Agent State requires <code>python script.py</code>.
+                    Both can coexist. You can use Agent State integrations alongside MCP connections.
                 </p>
 
-                <h3>Can I have multiple Agent State repositories?</h3>
+                <h3>What agents does this work with?</h3>
                 <p>
-                    Yes. Organizations may maintain multiple Agent State repositories to isolate different types
-                    of information. For example, you might have separate repositories for different teams or
-                    different types of data.
+                    Any agent that can run Python scripts and access a Git repository.
+                    Tested with Claude Code, Devin, Cursor, Windsurf, Copilot, and Antigravity.
                 </p>
 
-                <h3>What should I store in the Agent State repository?</h3>
+                <h3>Do I need to use all 100+ tools?</h3>
                 <p>
-                    Store anything that should persist across sessions: helper scripts agents create, organizational
-                    metadata (developers, systems, ownership), context about processes, and any other information
-                    that helps agents work more effectively.
+                    No. Use the assembler to pick only what you need. The resulting repo contains only
+                    your selected tools with auto-generated AGENTS.md files for navigation.
+                </p>
+
+                <h3>Can I add my own integrations?</h3>
+                <p>
+                    Yes. Follow the same pattern (single Python file, argparse, JSON output, env vars)
+                    and submit a PR to the <a href="https://github.com/caetanominuzzo/agentstate-awesome" target="_blank" rel="noopener">awesome collection</a>.
+                </p>
+
+                <h3>What about persistent state and memory?</h3>
+                <p>
+                    Agent State repositories also serve as persistent memory for your agents.
+                    The knowledge/ and memory/ directories store organizational context, developer profiles,
+                    and domain information that agents accumulate over time. This is complementary to the
+                    integration scripts.
+                </p>
+
+                <h3>Is this production-ready?</h3>
+                <p>
+                    Agent State has been used in production at Mottu across thousands of repositories.
+                    The integration scripts are community-reviewed and follow consistent patterns.
+                    Review scripts before deploying — they run with your agent's permissions.
                 </p>
             </div>
         </section>
@@ -329,7 +304,7 @@
     <footer>
         <div class="container">
             <p>
-                Agent State is an open standard for the LLM agent ecosystem.
+                Agent State is an open-source toolbox for the AI agent ecosystem.
             </p>
             <p>
                 We're building a public list of organizations using Agent State.

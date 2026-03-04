@@ -282,7 +282,7 @@
       if (!resp.ok) throw new Error(resp.statusText);
       collection = await resp.json();
       var totalEl = document.getElementById('assembler-total');
-      if (totalEl) totalEl.textContent = '(' + (collection.items || []).length + ' tools & integrations)';
+      if (totalEl) totalEl.textContent = (collection.items || []).length + ' tools & integrations';
       renderFilterTabs();
       renderGrid();
     } catch (e) {
@@ -594,8 +594,8 @@
     var lines = [
       '# Agent State',
       '',
-      'Persistent tooling ecosystem for AI agents.',
-      'This repository stores tools, scripts, organizational context, and long-term memory shared by all agents.',
+      'An open toolbox for AI agents — integrations, skills, and organizational knowledge.',
+      'Plain Python scripts, versioned in Git. No protocols, no vendor lock-in.',
       '',
       '## Directory Guide',
       '',
