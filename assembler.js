@@ -306,6 +306,11 @@
       filterTabs.appendChild(btn);
     });
 
+    // Default to "integrations" tab if it exists, otherwise "all"
+    var defaultTab = filterTabs.querySelector('.filter-tab[data-category="integrations"]');
+    if (!defaultTab) defaultTab = filterTabs.querySelector('.filter-tab[data-category="all"]');
+    if (defaultTab) defaultTab.classList.add('active');
+
     filterTabs.addEventListener('click', function (e) {
       if (!e.target.classList.contains('filter-tab')) return;
       filterTabs.querySelectorAll('.filter-tab').forEach(function (b) {
@@ -382,7 +387,10 @@
       var catTitle = categoryNames[cat] || capitalize(cat);
 
       html += '<div class="assembler-category">';
+      html += '<div class="assembler-category-header">';
       html += '<h3 class="assembler-category-title">' + escapeHtml(catTitle) + '</h3>';
+      html += '<button class="select-all-btn" data-category="' + escapeHtml(cat) + '">Select all</button>';
+      html += '</div>';
       html += '<div class="assembler-columns">';
 
       // Items without subcategory
@@ -441,7 +449,6 @@
       return typeof v === 'object' ? v.required !== false : true;
     }).length;
     var envBadge = envCount > 0 ? '<span class="card-env-badge">' + envCount + ' env' + '</span>' : '';
-    var star = item.featured ? '<span class="card-star" title="Featured">&#9733;</span>' : '';
     var tags = (item.tech_tags || [])
       .concat(item.tags || [])
       .slice(0, 4)
@@ -452,16 +459,33 @@
 
     var icon = getItemIcon(item);
 
+    var envVarsList = (item.env_vars || []).map(function (v) {
+      if (typeof v === 'object' && v.name) return v;
+      if (typeof v === 'string') return { name: v, description: '', required: true };
+      return null;
+    }).filter(Boolean);
+
+    var envHtml = '';
+    if (envVarsList.length > 0) {
+      envHtml = '<div class="card-envvars">';
+      envVarsList.forEach(function (v) {
+        var opt = v.required === false ? ' <span class="card-env-optional">(optional)</span>' : '';
+        envHtml += '<div class="card-envvar"><code>' + escapeHtml(v.name) + '</code>' + opt + '</div>';
+      });
+      envHtml += '</div>';
+    }
+
     return (
       '<div class="assembler-card' + checked + '" data-id="' + escapeHtml(item.id) + '">' +
       '<div class="card-row">' +
       '<span class="card-check" aria-hidden="true"></span>' +
       icon +
       '<span class="card-name">' + escapeHtml(item.name) + '</span>' +
-      '<span class="card-row-right"><span class="card-info-btn" title="Details">?</span>' + envBadge + star + '</span>' +
+      '<span class="card-row-right">' + envBadge + '<span class="card-info-btn" title="Details">?</span></span>' +
       '</div>' +
       '<div class="card-expand">' +
       '<p class="card-desc">' + escapeHtml(item.description) + '</p>' +
+      envHtml +
       '<div class="card-tags">' + tags + '</div>' +
       '</div>' +
       '</div>'
@@ -523,7 +547,6 @@
       envvarsEl.textContent = '';
     }
     btnZip.disabled = count === 0;
-    btnRepo.disabled = count === 0;
   }
 
   // ---------------------------------------------------------------------------
