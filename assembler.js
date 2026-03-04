@@ -296,10 +296,19 @@
   // Filter tabs
   // ---------------------------------------------------------------------------
   function renderFilterTabs() {
-    const cats = collection.categories || [];
+    var cats = collection.categories || [];
+    // Preferred tab order — unlisted categories appear at the end
+    var tabOrder = ['integrations', 'skills'];
+    cats.sort(function (a, b) {
+      var ia = tabOrder.indexOf(a.id);
+      var ib = tabOrder.indexOf(b.id);
+      if (ia === -1) ia = 999;
+      if (ib === -1) ib = 999;
+      return ia - ib || a.name.localeCompare(b.name);
+    });
     // "All" tab is already in HTML
     cats.forEach(function (cat) {
-      const btn = document.createElement('button');
+      var btn = document.createElement('button');
       btn.className = 'filter-tab';
       btn.dataset.category = cat.id;
       btn.textContent = cat.name;
