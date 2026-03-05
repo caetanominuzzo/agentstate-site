@@ -932,6 +932,9 @@
       if (typeof gtag === 'function') {
         gtag('event', 'page_view', { page_path: '/download-zip', page_title: 'Download ZIP (' + selectedIds.size + ' items)' });
         gtag('event', 'download_zip', { event_category: 'assembler', value: selectedIds.size });
+        selectedIds.forEach(function (id) {
+          gtag('event', 'select_item', { event_category: 'assembler', item_id: id });
+        });
       }
     } catch (e) {
       console.error('ZIP generation failed:', e);
