@@ -927,6 +927,12 @@
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+
+      // Track as virtual pageview + event in GA
+      if (typeof gtag === 'function') {
+        gtag('event', 'page_view', { page_path: '/download-zip', page_title: 'Download ZIP (' + selectedIds.size + ' items)' });
+        gtag('event', 'download_zip', { event_category: 'assembler', value: selectedIds.size });
+      }
     } catch (e) {
       console.error('ZIP generation failed:', e);
       alert('Failed to generate ZIP: ' + e.message);
